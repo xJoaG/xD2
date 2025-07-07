@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 transition-all duration-700"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.05) 25%, rgba(15, 23, 42, 1) 50%)`
+          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.04) 0%, rgba(139, 92, 246, 0.02) 25%, rgba(15, 23, 42, 1) 50%)`
         }}
       />
       
