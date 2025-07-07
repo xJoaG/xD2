@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X, Globe, BookOpen, User, LogOut, Settings, CreditCard, Bell, ChevronDown, Crown, Zap } from 'lucide-react';
+import { Menu, X, Globe, BookOpen, User, LogOut, Settings, CreditCard, Bell, ChevronDown, Crown, Zap, Code } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
@@ -51,10 +51,10 @@ const Navbar: React.FC = () => {
       className="absolute right-0 top-full mt-3 w-72 glass-morphism rounded-2xl border border-white/20 shadow-2xl z-[60] animate-fade-in overflow-hidden"
     >
       {/* User Info Header */}
-      <div className="p-5 bg-gradient-to-r from-indigo-500/10 to-purple-600/10 border-b border-white/10">
+      <div className="p-5 bg-gradient-to-r from-blue-500/10 to-green-500/10 border-b border-white/10">
         <div className="flex items-center space-x-3">
           <div className="relative">
-            <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl flex items-center justify-center shadow-lg">
               <User className="h-6 w-6 text-white" />
             </div>
             <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white/20 animate-pulse"></div>
@@ -76,8 +76,8 @@ const Navbar: React.FC = () => {
           href="/dashboard" 
           className="flex items-center space-x-3 px-3 py-3 rounded-xl hover:bg-white/10 transition-all duration-200 group"
         >
-          <div className="p-2 bg-indigo-500/20 rounded-lg group-hover:bg-indigo-500/30 transition-colors duration-200">
-            <BookOpen className="h-4 w-4 text-indigo-400" />
+          <div className="p-2 bg-blue-500/20 rounded-lg group-hover:bg-blue-500/30 transition-colors duration-200">
+            <BookOpen className="h-4 w-4 text-blue-400" />
           </div>
           <span className="text-white font-medium">Dashboard</span>
         </a>
@@ -118,38 +118,49 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-[50] transition-all duration-500 ${
-        scrolled ? 'glass-morphism border-b border-white/10 py-2' : 'bg-transparent py-3'
+        scrolled ? 'glass-morphism border-b border-white/10 py-2 shadow-2xl' : 'bg-transparent py-3'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14">
-            {/* Clean Logo */}
-            <div className="flex items-center space-x-2 group cursor-pointer">
-              <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-                <Globe className="h-5 w-5 text-white" />
+            {/* Enhanced Logo with C++ Hub branding */}
+            <div className="flex items-center space-x-3 group cursor-pointer hover:scale-105 transition-all duration-300">
+              <div className="relative">
+                <img 
+                  src="/src/assets/craiyon_215426_image.png" 
+                  alt="C++ Hub Logo" 
+                  className="w-10 h-10 rounded-lg shadow-lg group-hover:shadow-blue-500/50 transition-all duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-green-400/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <span className="text-xl font-bold text-white">EduSphere</span>
+              <div className="flex items-center space-x-2">
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+                  C++ Hub
+                </span>
+                <Code className="h-5 w-5 text-blue-400 group-hover:animate-pulse" />
+              </div>
             </div>
 
-            {/* Clean Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-6">
+            {/* Enhanced Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+                  className="relative text-gray-300 hover:text-white transition-all duration-300 font-medium group py-2"
                 >
                   {item.name}
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-green-400 group-hover:w-full transition-all duration-300"></div>
                 </a>
               ))}
             </div>
 
-            {/* Clean Auth Section */}
-            <div className="hidden md:flex items-center space-x-3">
+            {/* Enhanced Auth Section */}
+            <div className="hidden md:flex items-center space-x-4">
               {user ? (
                 <div className="flex items-center space-x-3">
                   {/* Notification Bell */}
-                  <button className="relative p-2 text-gray-300 hover:text-white transition-colors duration-200 hover:bg-white/10 rounded-lg">
-                    <Bell className="h-5 w-5" />
+                  <button className="relative p-2 text-gray-300 hover:text-white transition-colors duration-200 hover:bg-white/10 rounded-lg group">
+                    <Bell className="h-5 w-5 group-hover:animate-bounce" />
                     <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                   </button>
                   
@@ -157,9 +168,9 @@ const Navbar: React.FC = () => {
                   <div className="relative">
                     <button
                       onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                      className="flex items-center space-x-2 glass-morphism rounded-xl px-3 py-2 hover:bg-white/20 transition-all duration-300 border border-white/10"
+                      className="flex items-center space-x-2 glass-morphism rounded-xl px-3 py-2 hover:bg-white/20 transition-all duration-300 border border-white/10 group"
                     >
-                      <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
                         <User className="h-4 w-4 text-white" />
                       </div>
                       <span className="text-white font-medium text-sm">{user.name}</span>
@@ -172,16 +183,19 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   <button
                     onClick={() => openAuthModal('login')}
-                    className="text-white font-medium px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-200"
+                    className="text-white font-medium px-6 py-2 rounded-lg hover:bg-white/10 transition-all duration-300 border border-transparent hover:border-white/20"
                   >
                     Sign In
                   </button>
                   <button
                     onClick={() => openAuthModal('register')}
-                    className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 flex items-center space-x-1"
+                    className="relative overflow-hidden bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 py-2 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 flex items-center space-x-2 group"
                   >
-                    <Crown className="h-4 w-4" />
-                    <span>Start Free</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="relative flex items-center space-x-2">
+                      <Code className="h-4 w-4" />
+                      <span>Start Learning</span>
+                    </div>
                   </button>
                 </div>
               )}
@@ -198,9 +212,9 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Enhanced Mobile Navigation */}
           {isOpen && (
-            <div className="md:hidden py-4 border-t border-white/10">
+            <div className="md:hidden py-4 border-t border-white/10 animate-slide-down">
               <div className="flex flex-col space-y-2">
                 {navItems.map((item) => (
                   <a
@@ -215,7 +229,7 @@ const Navbar: React.FC = () => {
                 {user ? (
                   <div className="border-t border-white/10 pt-3 mt-3">
                     <div className="flex items-center space-x-3 px-3 py-2 mb-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
                         <User className="h-4 w-4 text-white" />
                       </div>
                       <div>
@@ -250,10 +264,10 @@ const Navbar: React.FC = () => {
                         openAuthModal('register');
                         setIsOpen(false);
                       }}
-                      className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-3 py-2 rounded-lg font-medium mx-3 flex items-center justify-center space-x-2"
+                      className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-3 py-2 rounded-lg font-medium mx-3 flex items-center justify-center space-x-2"
                     >
-                      <Crown className="h-4 w-4" />
-                      <span>Start Free</span>
+                      <Code className="h-4 w-4" />
+                      <span>Start Learning</span>
                     </button>
                   </div>
                 )}

@@ -5,6 +5,7 @@ import Features from '../components/Features';
 import DeviceCompatibility from '../components/DeviceCompatibility';
 import Courses from '../components/Courses';
 import Stats from '../components/Stats';
+import PricingSection from '../components/PricingSection';
 import Testimonials from '../components/Testimonials';
 import CTA from '../components/CTA';
 import Footer from '../components/Footer';
@@ -21,8 +22,9 @@ const HomePage: React.FC = () => {
       <DeviceCompatibility />
       <Stats />
       <Courses />
-  //    <Testimonials />
-    //  <CTA />
+      <PricingSection />
+      <Testimonials />
+      <CTA />
       <Footer />
       <TutorWidget />
     </div>
