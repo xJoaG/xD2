@@ -39,9 +39,9 @@ const Hero: React.FC = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Dynamic gradient background that responds to mouse */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 transition-all duration-1000"
+        className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 transition-all duration-700"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 25%, rgba(15, 23, 42, 1) 50%)`
+          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.05) 25%, rgba(15, 23, 42, 1) 50%)`
         }}
       />
       
@@ -141,7 +141,7 @@ const Hero: React.FC = () => {
           {/* Revolutionary main heading with advanced typography */}
           <div className="space-y-8 animate-slide-up">
             <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.85] tracking-tight relative">
-              <span className="inline-block animate-text-shimmer bg-gradient-to-r from-white via-blue-200 to-white bg-[length:200%_100%]">
+              <span className="inline-block text-white">
                 Master
               </span>
               <br />
@@ -328,10 +328,10 @@ const Hero: React.FC = () => {
 
         @keyframes text-glow {
           0%, 100% { 
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
           }
           50% { 
-            text-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 60px rgba(99, 102, 241, 0.6);
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.5), 0 0 35px rgba(99, 102, 241, 0.3);
           }
         }
 
