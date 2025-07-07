@@ -205,7 +205,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, initialMode = 'login' })
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="input-field pl-12 focus-ring text-lg py-4"
+                  className="input-field pl-14 pr-4 focus-ring text-lg py-4"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -226,7 +226,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, initialMode = 'login' })
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="input-field pl-12 focus-ring text-lg py-4"
+                className="input-field pl-14 pr-4 focus-ring text-lg py-4"
                 placeholder="Enter your email"
               />
             </div>
@@ -246,13 +246,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, initialMode = 'login' })
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="input-field pl-12 pr-12 focus-ring text-lg py-4"
+                className="input-field pl-14 pr-14 focus-ring text-lg py-4"
                 placeholder="Enter your password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-200 p-1"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-200 p-2"
               >
                 {showPassword ? <EyeOff className="h-6 w-6" /> : <Eye className="h-6 w-6" />}
               </button>
