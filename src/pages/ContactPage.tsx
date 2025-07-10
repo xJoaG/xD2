@@ -184,7 +184,7 @@ const ContactPage: React.FC = () => {
                     <MessageCircle className="h-6 w-6 text-green-400" />
                     <div>
                       <div className="text-white font-medium">Average Response Time</div>
-                      <div className="text-green-400 text-sm">< 2 hours</div>
+                      <div className="text-green-400 text-sm">{"< 2 hours"}</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
