@@ -14,9 +14,11 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Courses', href: '#courses' },
-    { name: 'Features', href: '#features' },
-    { name: 'Pricing', href: '#pricing' },
+    { name: 'Courses', href: '/courses' },
+    { name: 'Features', href: '/features' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   // Handle scroll effect
