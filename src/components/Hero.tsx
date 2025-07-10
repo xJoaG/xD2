@@ -31,8 +31,6 @@ const Hero: React.FC = () => {
     { icon: Cpu, delay: '2s', duration: '25s', color: 'text-purple-400' },
     { icon: Brain, delay: '4s', duration: '18s', color: 'text-green-400' },
     { icon: Rocket, delay: '6s', duration: '22s', color: 'text-pink-400' },
-    { icon: Zap, delay: '8s', duration: '19s', color: 'text-yellow-400' },
-    { icon: Crown, delay: '10s', duration: '24s', color: 'text-indigo-400' },
   ];
 
   return (
@@ -47,8 +45,7 @@ const Hero: React.FC = () => {
       
       {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden z-[2]">
-        {/* Reduced floating elements for professionalism */}
-        {floatingElements.slice(0, 4).map((element, i) => (
+        {floatingElements.map((element, i) => (
           <div
             key={i}
             className={`absolute ${element.color} opacity-10`}
@@ -64,7 +61,7 @@ const Hero: React.FC = () => {
         ))}
 
         {/* Subtle geometric shapes */}
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={i}
             className="absolute opacity-5"
@@ -84,7 +81,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-grid-pattern opacity-3 z-[3]" />
 
       {/* Content */}
-      <div className="relative z-[10] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+      <div className="relative z-[10] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20">
         <div className="text-center space-y-12">
           {/* Professional logo and badge */}
           <div className="inline-flex items-center space-x-6 glass-morphism rounded-full px-8 py-4 border border-white/20 shadow-xl animate-fade-in hover:scale-105 transition-all duration-500">
@@ -107,23 +104,29 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Professional main heading with better text handling */}
+          {/* Fixed main heading with proper sizing and spacing */}
           <div className="space-y-8 animate-slide-up">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.9] tracking-tight relative max-w-6xl mx-auto">
-              <span className="inline-block text-white">
-                Master
-              </span>
-              <br />
-              <span className="block text-gradient-primary bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 bg-clip-text text-transparent animate-gradient-x bg-[length:200%_100%] break-words"> 
-                C++ Programming
-              </span>
-              <br />
-              <span className="inline-block text-white/95">
-                Like Never Before
-              </span>
+            <div className="relative">
+              <h1 className="font-black text-white leading-tight tracking-tight relative mx-auto text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl max-w-5xl">
+                <div className="mb-2">
+                  <span className="inline-block text-white">
+                    Master
+                  </span>
+                </div>
+                <div className="mb-2">
+                  <span className="block text-gradient-primary bg-gradient-to-r from-blue-400 via-cyan-400 to-green-400 bg-clip-text text-transparent animate-gradient-x bg-[length:200%_100%]"> 
+                    C++ Programming
+                  </span>
+                </div>
+                <div>
+                  <span className="inline-block text-white/95">
+                    Like Never Before
+                  </span>
+                </div>
+              </h1>
               
               {/* Professional code snippet */}
-              <div className="absolute -top-8 -right-8 opacity-15 animate-float hidden lg:block">
+              <div className="absolute -top-8 -right-8 opacity-15 animate-float hidden xl:block">
                 <div className="bg-black/40 rounded-lg p-4 font-mono text-green-400 text-sm border border-green-400/20 backdrop-blur-sm">
                   <div>{'#include <iostream>'}</div>
                   <div>{'using namespace std;'}</div>
@@ -132,7 +135,7 @@ const Hero: React.FC = () => {
                   <div>{'}'}</div>
                 </div>
               </div>
-            </h1>
+            </div>
             
             <p className="text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed font-light animate-fade-in-delay">
               Experience professional-grade programming education with our 
@@ -275,25 +278,45 @@ const Hero: React.FC = () => {
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        /* Ensure text doesn't break awkwardly */
-        .break-words {
+        /* Fixed responsive text sizing to prevent cutoff */
+        h1 {
+          line-height: 1.1 !important;
           word-wrap: break-word;
           overflow-wrap: break-word;
-          hyphens: auto;
         }
 
-        /* Professional responsive text sizing */
         @media (max-width: 640px) {
           h1 {
-            font-size: 2.5rem !important;
+            font-size: 2.25rem !important; /* text-4xl */
+            line-height: 1.2 !important;
+          }
+        }
+
+        @media (min-width: 641px) and (max-width: 768px) {
+          h1 {
+            font-size: 3rem !important; /* text-5xl */
+            line-height: 1.15 !important;
+          }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+          h1 {
+            font-size: 3.75rem !important; /* text-6xl */
             line-height: 1.1 !important;
           }
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 1025px) and (max-width: 1280px) {
           h1 {
-            font-size: 3.5rem !important;
+            font-size: 4.5rem !important; /* text-7xl */
             line-height: 1.1 !important;
+          }
+        }
+
+        @media (min-width: 1281px) {
+          h1 {
+            font-size: 6rem !important; /* text-8xl */
+            line-height: 1.05 !important;
           }
         }
       `}</style>
