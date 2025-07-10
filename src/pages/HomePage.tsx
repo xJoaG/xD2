@@ -99,15 +99,19 @@ const HomePage: React.FC = () => {
               </div>
             ))}
           </div>
-      <Footer />
-      <TutorWidget />
-    </div>
-  );
-};
 
           <div className="text-center">
             <a 
               href="/courses"
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all duration-300 border border-white/20"
+            >
+              <span>View All Courses</span>
+              <ArrowRight className="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Quick Stats */}
       <section className="py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -126,7 +130,7 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
-              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all duration-300 border border-white/20"
+
       {/* CTA Section */}
       <section className="py-20 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -156,11 +160,11 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
-            >
-              <span>View All Courses</span>
-              <ArrowRight className="h-5 w-5" />
-            </a>
-          </div>
-        </div>
-      </section>
+
+      <Footer />
+      <TutorWidget />
+    </div>
+  );
+};
+
 export default HomePage;
