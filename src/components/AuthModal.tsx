@@ -83,13 +83,18 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, initialMode = 'login' })
 
     try {
       if (isLogin) {
-        await login(formData.email, formData.password);
+        await login({ email: formData.email, password: formData.password });
       } else {
-        await register(formData.email, formData.password, formData.name);
+        await register({ 
+          name: formData.name, 
+          email: formData.email, 
+          password: formData.password,
+          plan: selectedPlan 
+        });
       }
       onClose();
     } catch (error) {
-      setErrors({ submit: 'Authentication failed. Please try again.' });
+      setErrors({ submit: error instanceof Error ? error.message : 'Authentication failed. Please try again.' });
     }
   };
 

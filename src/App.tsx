@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import CoursesPage from './pages/CoursesPage';
 import FeaturesPage from './pages/FeaturesPage';
@@ -23,7 +24,11 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute requireAuth={true}>
+                <DashboardPage />
+              </ProtectedRoute>
+            } />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/verify-email" element={<VerifyEmailPage />} />
           </Routes>

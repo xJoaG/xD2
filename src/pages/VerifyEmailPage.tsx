@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, CheckCircle, ArrowLeft, RotateCcw } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import verificationService from '../services/verificationService';
+import { useAuth } from '../context/AuthContext';
 
 const VerifyEmailPage: React.FC = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const [countdown, setCountdown] = useState(60);
+  const [error, setError] = useState<string>('');
+  const [isVerifying, setIsVerifying] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { user, refreshUser } = useAuth();
+  const token = searchParams.get('token');
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -16,19 +23,54 @@ const VerifyEmailPage: React.FC = () => {
     return () => clearTimeout(timer);
   }, [countdown]);
 
+  // Auto-verify if token is in URL
+  useEffect(() => {
+    if (token && !isVerified) {
+      handleVerification(token);
+    }
+  }, [token]);
   const handleResendEmail = async () => {
+    if (!user?.email) return;
+    
     setIsResending(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setIsResending(false);
-    setCountdown(60);
+    setError('');
+    
+    try {
+      await verificationService.resendVerificationEmail(user.email);
+      setCountdown(60);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Failed to resend email');
+    } finally {
+      setIsResending(false);
+    }
   };
 
-  const handleVerification = () => {
-    setIsVerified(true);
-    setTimeout(() => {
-      navigate('/dashboard');
-    }, 2000);
+  const handleVerification = async (verificationToken?: string) => {
+    const tokenToUse = verificationToken || token;
+    if (!tokenToUse) {
+      setError('No verification token provided');
+      return;
+    }
+
+    setIsVerifying(true);
+    setError('');
+
+    try {
+      const response = await verificationService.verifyEmail(tokenToUse);
+      if (response.success) {
+        setIsVerified(true);
+        await refreshUser(); // Refresh user data to update verification status
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 2000);
+      } else {
+        setError(response.message || 'Verification failed');
+      }
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Verification failed');
+    } finally {
+      setIsVerifying(false);
+    }
   };
 
   if (isVerified) {
@@ -63,21 +105,35 @@ const VerifyEmailPage: React.FC = () => {
         {/* Email sent to */}
         <div className="bg-white/5 rounded-lg p-4 mb-6 border border-white/10">
           <p className="text-sm text-gray-400">Email sent to:</p>
-          <p className="text-white font-medium">user@example.com</p>
+          <p className="text-white font-medium">{user?.email || 'your email'}</p>
         </div>
 
+        {/* Error message */}
+        {error && (
+          <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4 mb-6">
+            <p className="text-red-400 text-sm text-center">{error}</p>
+          </div>
+        )}
         {/* Actions */}
         <div className="space-y-4">
           <button
-            onClick={handleVerification}
-            className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200"
+            onClick={() => handleVerification()}
+            disabled={isVerifying || !token}
+            className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
           >
-            I've Verified My Email
+            {isVerifying ? (
+              <>
+                <RotateCcw className="h-4 w-4 animate-spin" />
+                <span>Verifying...</span>
+              </>
+            ) : (
+              <span>Verify Email</span>
+            )}
           </button>
 
           <button
             onClick={handleResendEmail}
-            disabled={isResending || countdown > 0}
+            disabled={isResending || countdown > 0 || !user?.email}
             className="w-full bg-white/10 backdrop-blur-sm text-white py-3 rounded-lg font-semibold hover:bg-white/20 transition-all duration-200 border border-white/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
           >
             {isResending ? (
